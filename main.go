@@ -8,13 +8,13 @@ import (
 
 func main() {
 	fmt.Println("Hello world!")
-	h := http.FileServer(http.Dir("assets"))
+	fs := http.FileServer(http.Dir("assets"))
 
-	http.Handle("/", h)
+	http.Handle("/", fs)
 	http.HandleFunc("/hello", SayHello)
 	http.HandleFunc("/hook", hook)
-	fmt.Println("Should open the browser on https://localhost:1234")
-	log.Fatal(http.ListenAndServeTLS(":1234", "localhost.crt", "localhost.key", nil)) // Lets run it
+	fmt.Println("Serving https://localhost:1234/")
+	log.Fatal(http.ListenAndServeTLS(":1234", "localhost.crt", "localhost.key", nil))
 }
 
 func SayHello(w http.ResponseWriter, req *http.Request) {
