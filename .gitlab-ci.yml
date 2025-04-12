@@ -8,6 +8,10 @@
 
 image: golang:latest
 
+default:
+  tags:
+    - local
+
 stages:
   - test
   - build
